@@ -1,0 +1,100 @@
+﻿1
+00:00:00,033 --> 00:00:03,470
+Congratulations and thank you for getting
+to the end of this short course
+
+2
+00:00:04,037 --> 00:00:05,372
+as we conclude the course.
+
+3
+00:00:05,372 --> 00:00:07,874
+Let's recap the main topics we covered.
+
+4
+00:00:07,874 --> 00:00:11,778
+We went over details of how land works,
+including subtleties
+
+5
+00:00:11,778 --> 00:00:14,914
+like The Tokenize
+and why it can't reverse Lollipop.
+
+6
+00:00:15,648 --> 00:00:18,084
+We learned methods for evaluating user
+inputs
+
+7
+00:00:18,084 --> 00:00:21,554
+to ensure the quality
+and safety of the system processing inputs
+
+8
+00:00:22,088 --> 00:00:25,625
+using both chain of thought, reasoning
+and splitting tasks into subtasks
+
+9
+00:00:25,625 --> 00:00:29,162
+with chain prompts and checking outputs
+before showing them to users.
+
+10
+00:00:29,763 --> 00:00:34,034
+We also took a look at methods
+for evaluating the system over time
+
+11
+00:00:34,267 --> 00:00:36,870
+so as to monitor
+and improve its performance.
+
+12
+00:00:37,604 --> 00:00:40,673
+Throughout the course, we also discussed
+the importance of building responsibly
+
+13
+00:00:40,673 --> 00:00:41,608
+with these tools,
+
+14
+00:00:41,608 --> 00:00:44,677
+ensuring that the model is safe
+and provides appropriate responses
+
+15
+00:00:44,677 --> 00:00:47,113
+that are accurate, relevant
+and in the turn you want.
+
+16
+00:00:47,680 --> 00:00:50,283
+As always, practices key
+to mastering these concepts.
+
+17
+00:00:50,517 --> 00:00:53,086
+So we hope you'll apply
+what you've learned in your own projects.
+
+18
+00:00:54,054 --> 00:00:55,655
+And so that's it.
+
+19
+00:00:55,655 --> 00:00:59,192
+There are so many exciting applications
+that are yet to be built.
+
+20
+00:00:59,626 --> 00:01:03,363
+The world needs more people
+like you building useful applications,
+
+21
+00:01:03,363 --> 00:01:07,167
+and we look forward to hearing
+about the amazing things you build.

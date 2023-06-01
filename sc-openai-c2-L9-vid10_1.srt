@@ -1,0 +1,722 @@
+﻿1
+00:00:05,100 --> 00:00:07,766
+And the
+last video you saw how to evaluate.
+
+2
+00:00:07,766 --> 00:00:12,266
+And I'll put in an example
+where it had the right answer
+
+3
+00:00:12,366 --> 00:00:15,566
+and so could write down a function
+to explicitly
+
+4
+00:00:15,566 --> 00:00:19,500
+just tell us
+if the outputs the right categories.
+
+5
+00:00:19,500 --> 00:00:21,100
+And this are products.
+
+6
+00:00:21,100 --> 00:00:24,566
+But one of the elements used to generate
+text in there is in just one
+
+7
+00:00:24,766 --> 00:00:26,166
+right piece of text.
+
+8
+00:00:26,166 --> 00:00:30,966
+Let's take a look at an approach
+for how to evaluate that type of outputs.
+
+9
+00:00:31,633 --> 00:00:35,966
+Here's my usual helper functions
+and and given the customer message,
+
+10
+00:00:36,033 --> 00:00:39,666
+tell me about this one x pro phone
+and it it's that camera and so on.
+
+11
+00:00:40,000 --> 00:00:43,066
+Here are a few utils to get me
+the assistance.
+
+12
+00:00:43,066 --> 00:00:44,333
+Answer.
+
+13
+00:00:44,400 --> 00:00:47,766
+This is basically the process that user
+has stepped through in earlier videos.
+
+14
+00:00:48,200 --> 00:00:50,266
+And so here's the assistant answer.
+
+15
+00:00:50,400 --> 00:00:54,900
+Sure, we have the whole smartphone,
+the slice pro phone and so on
+
+16
+00:00:54,900 --> 00:00:58,633
+and so forth.
+
+17
+00:00:58,633 --> 00:01:03,300
+So how can you evaluate
+if this is a good answer or not?
+
+18
+00:01:04,266 --> 00:01:07,666
+Seems like there are lots of possible
+good answers.
+
+19
+00:01:07,666 --> 00:01:12,866
+One way to evaluate
+this is to write a rubric,
+
+20
+00:01:13,100 --> 00:01:18,800
+meaning a set of guidelines to evaluate
+this answer on different dimensions,
+
+21
+00:01:18,800 --> 00:01:22,500
+and then use that to decide whether or not
+you're satisfied with this answer.
+
+22
+00:01:23,800 --> 00:01:25,866
+Let me show you how to do that.
+
+23
+00:01:25,866 --> 00:01:29,266
+So let me create a little data structure
+to store the customization
+
+24
+00:01:29,266 --> 00:01:31,366
+as well as the product info.
+
+25
+00:01:31,366 --> 00:01:33,633
+So here I'm going to specify a prompt
+
+26
+00:01:34,200 --> 00:01:39,000
+for evaluating the assistant answer using
+what's called the rubric.
+
+27
+00:01:39,000 --> 00:01:41,100
+I'll explain the second what that means.
+
+28
+00:01:41,100 --> 00:01:44,300
+But this is in the system message
+and the system
+
+29
+00:01:44,300 --> 00:01:48,066
+evaluates how well the customer service
+agent answers the user question.
+
+30
+00:01:48,066 --> 00:01:50,100
+But it's in the context
+that the customer service
+
+31
+00:01:50,100 --> 00:01:52,033
+agents are using the general response.
+
+32
+00:01:52,033 --> 00:01:55,266
+So this response is what we had further up
+the notebook.
+
+33
+00:01:55,566 --> 00:02:00,333
+What that was the assistant answer
+and we're going to specify the data.
+
+34
+00:02:00,333 --> 00:02:04,533
+And this problem was the customer
+message was the context.
+
+35
+00:02:04,933 --> 00:02:08,533
+That is was the product and category
+information that was provided.
+
+36
+00:02:08,533 --> 00:02:11,033
+And then what was the output of the lab.
+
+37
+00:02:11,033 --> 00:02:12,433
+And then this is a rubric.
+
+38
+00:02:12,433 --> 00:02:16,166
+So we want to compare the factual content
+to something as of the content,
+
+39
+00:02:16,666 --> 00:02:17,466
+you know, differences.
+
+40
+00:02:17,466 --> 00:02:21,100
+So grammar, punctuation
+and then we wanted to check a few things
+
+41
+00:02:21,100 --> 00:02:25,033
+like is the assistant response
+based only on the content provided?
+
+42
+00:02:25,033 --> 00:02:28,533
+Does the answer include information
+that is not provided in the context?
+
+43
+00:02:28,566 --> 00:02:31,133
+Is there any disagreement between response
+and the context?
+
+44
+00:02:31,800 --> 00:02:36,833
+So this is called a rubric
+and this specifies what we think
+
+45
+00:02:37,433 --> 00:02:41,766
+the answer should get right
+for us to consider as a good answer.
+
+46
+00:02:42,633 --> 00:02:45,333
+Then finally, we wanted to print out
+yes or no
+
+47
+00:02:45,633 --> 00:02:50,066
+and so on.
+
+48
+00:02:50,066 --> 00:02:52,833
+And now, if we were to
+
+49
+00:02:53,966 --> 00:02:58,266
+run this evaluation, this is what you get.
+
+50
+00:02:59,300 --> 00:03:02,800
+So says the assistant response
+is based on the content provided
+
+51
+00:03:03,133 --> 00:03:05,700
+it does not in this case
+seem to make up new information.
+
+52
+00:03:06,366 --> 00:03:07,800
+There isn't disagreements.
+
+53
+00:03:07,800 --> 00:03:09,833
+Use Ask two questions.
+Answer question one.
+
+54
+00:03:09,833 --> 00:03:12,533
+Then ask the question
+to answer both questions.
+
+55
+00:03:13,800 --> 00:03:16,233
+So we would look for this output
+
+56
+00:03:16,233 --> 00:03:18,933
+and maybe conclude
+that this is a pretty good response.
+
+57
+00:03:19,866 --> 00:03:22,866
+And one notes sure, I'm using
+
+58
+00:03:23,400 --> 00:03:28,000
+the charge of these 3.5 turbo model
+for this evaluation.
+
+59
+00:03:28,600 --> 00:03:32,833
+For a more robust evaluation,
+it might be worth considering using GPP
+
+60
+00:03:32,866 --> 00:03:36,333
+for because even if you deploy 3.5
+
+61
+00:03:36,333 --> 00:03:41,233
+turbo in production and generate
+a lot of text, if your evaluation
+
+62
+00:03:41,566 --> 00:03:45,200
+is a more sporadic exercise,
+then it may be
+
+63
+00:03:45,933 --> 00:03:51,033
+prudent to pay for the somewhat
+more expensive GP for API call
+
+64
+00:03:51,333 --> 00:03:56,233
+to get a more rigorous evaluation
+of the upwards of one design patterns.
+
+65
+00:03:56,233 --> 00:03:59,900
+I hope your take away from this
+is that you can specify a rubric,
+
+66
+00:04:01,333 --> 00:04:02,133
+meaning a
+
+67
+00:04:02,133 --> 00:04:05,900
+list of
+criteria by which to evaluate an output.
+
+68
+00:04:05,900 --> 00:04:11,433
+Then you can actually use another API call
+to evaluate your first output.
+
+69
+00:04:12,166 --> 00:04:14,966
+That's one of the design patterns
+that could be useful
+
+70
+00:04:15,700 --> 00:04:18,233
+for some applications,
+
+71
+00:04:18,400 --> 00:04:22,500
+which is if you can specify
+an ideal response.
+
+72
+00:04:22,800 --> 00:04:27,500
+So here I'm going to specify a test
+example where the customer messages
+
+73
+00:04:27,500 --> 00:04:30,233
+tell me about the spikes
+profile and so on.
+
+74
+00:04:30,733 --> 00:04:32,700
+And she has an ideal answer.
+
+75
+00:04:32,700 --> 00:04:35,700
+So this is if you have an expert human
+
+76
+00:04:35,700 --> 00:04:38,700
+customer service representative,
+write a really good answer.
+
+77
+00:04:38,700 --> 00:04:41,466
+And the expert says
+this would be a great answer.
+
+78
+00:04:41,466 --> 00:04:44,566
+Of course, the spice profile of it
+and so on, it goes on
+
+79
+00:04:44,566 --> 00:04:46,766
+to give a lot of helpful information.
+
+80
+00:04:47,733 --> 00:04:52,766
+Now it is unreasonable to expect any lab
+to generate this exact answer.
+
+81
+00:04:53,033 --> 00:04:57,300
+We're four words, and in classical
+natural language processing techniques,
+
+82
+00:04:57,800 --> 00:05:00,866
+there are some traditional metrics
+for measuring
+
+83
+00:05:01,133 --> 00:05:06,166
+If the output is similar to this expert
+human rated outputs.
+
+84
+00:05:06,166 --> 00:05:09,900
+For example, there's
+something called the Blue Score EU.
+
+85
+00:05:09,900 --> 00:05:12,233
+Then you can search online
+to read more about.
+
+86
+00:05:12,500 --> 00:05:16,500
+They can measure how similar
+one piece of Texas from another,
+
+87
+00:05:17,500 --> 00:05:18,833
+but it turns out there's an
+
+88
+00:05:18,833 --> 00:05:24,300
+even better way,
+which is you can use a prompt
+
+89
+00:05:25,200 --> 00:05:29,300
+which you specify here
+to Austin 11 to compare
+
+90
+00:05:29,566 --> 00:05:33,700
+how well the automatically generated
+customer service agent outputs corresponds
+
+91
+00:05:33,700 --> 00:05:37,266
+to the ideal expert response
+that was written by a human.
+
+92
+00:05:37,566 --> 00:05:40,466
+They just showed up above
+
+93
+00:05:41,033 --> 00:05:42,300
+just the prompts
+
+94
+00:05:42,300 --> 00:05:45,466
+we can use,
+which is we're going to use an arm
+
+95
+00:05:45,733 --> 00:05:47,233
+and tell it to be an assistant
+
+96
+00:05:47,233 --> 00:05:51,100
+that evaluates how well the customer
+service agent has is just a question.
+
+97
+00:05:51,100 --> 00:05:53,933
+By comparing the response
+that was the automatic generated one
+
+98
+00:05:54,466 --> 00:05:57,066
+to the ideal expert
+human written response.
+
+99
+00:05:57,966 --> 00:06:02,766
+And so going to give it the data,
+which is what the customer requests.
+
+100
+00:06:03,100 --> 00:06:05,533
+Once the expert written it responds
+
+101
+00:06:05,766 --> 00:06:08,166
+and then what it actually outputs
+
+102
+00:06:08,900 --> 00:06:13,866
+and just rubric comes from the open,
+the eye open source framework,
+
+103
+00:06:14,400 --> 00:06:19,800
+which is a fantastic framework
+with many evaluation methods, contributed
+
+104
+00:06:19,800 --> 00:06:23,433
+both by open the developers
+and by the broader open source community.
+
+105
+00:06:24,033 --> 00:06:28,666
+In fact, if you once you could contribute
+an equal to that framework yourself
+
+106
+00:06:29,233 --> 00:06:32,200
+to help others evaluate their
+launch language, both outputs.
+
+107
+00:06:32,500 --> 00:06:37,866
+So in this rubric, we told the ELM to
+compare the factual content to the same.
+
+108
+00:06:38,233 --> 00:06:42,966
+So the expert answer and all differences
+allow grammar, punctuation and
+
+109
+00:06:43,966 --> 00:06:46,233
+the pause
+the video and read through this in detail.
+
+110
+00:06:46,600 --> 00:06:50,800
+But the key is
+we ask it to carry the comparison
+
+111
+00:06:50,800 --> 00:06:55,800
+and outputs a score from A to Z, depending
+on whether the submitted answer
+
+112
+00:06:55,800 --> 00:07:00,066
+is a subset of expensive
+and is fully consistent versus
+
+113
+00:07:00,100 --> 00:07:03,133
+the sum of the answer
+is a superset of the answer.
+
+114
+00:07:03,333 --> 00:07:04,800
+But this would be consistent with it.
+
+115
+00:07:04,800 --> 00:07:08,966
+This might mean that hallucinated
+or made up some additional facts.
+
+116
+00:07:08,966 --> 00:07:13,300
+Sympathizer contains
+all the details as an expert answer,
+
+117
+00:07:14,733 --> 00:07:18,733
+whether it is disagreements
+or whether it be as is differ.
+
+118
+00:07:18,733 --> 00:07:21,966
+But these differences still matter
+from the perspective of actuality,
+
+119
+00:07:22,633 --> 00:07:25,200
+and the lab will pick
+whichever of these seems to be
+
+120
+00:07:25,200 --> 00:07:26,900
+the most appropriate description.
+
+121
+00:07:26,900 --> 00:07:29,433
+So here's the assistant answer
+that we had just now.
+
+122
+00:07:29,433 --> 00:07:31,100
+I think it's a pretty good answer.
+
+123
+00:07:31,100 --> 00:07:34,200
+But now let's see what the things
+when I compress the assistant
+
+124
+00:07:34,200 --> 00:07:38,733
+as to test that idea
+looks like it got an eight.
+
+125
+00:07:38,733 --> 00:07:42,366
+And so things the submitted answer
+is a subset of the expert answer
+
+126
+00:07:42,666 --> 00:07:45,166
+and is fully consistent with it.
+And that sounds right to me.
+
+127
+00:07:45,166 --> 00:07:48,600
+This assistant
+as is much shorter than the long expert
+
+128
+00:07:48,600 --> 00:07:51,566
+answer up top,
+but it does hopefully is consistent.
+
+129
+00:07:51,866 --> 00:07:55,766
+Once again,
+I'm using 3.5 turbo in this example,
+
+130
+00:07:55,800 --> 00:07:58,733
+but to get a more rigorous
+evaluation, just
+
+131
+00:07:58,800 --> 00:08:02,700
+it might make sense to use
+D four in your old application.
+
+132
+00:08:04,233 --> 00:08:06,133
+Now let's try something totally different.
+
+133
+00:08:06,133 --> 00:08:09,900
+I'm going to have a very different
+assistant answer.
+
+134
+00:08:10,100 --> 00:08:14,433
+Life is like a box of chocolate call
+from a movie called Forrest Gump.
+
+135
+00:08:15,200 --> 00:08:20,133
+And if we were to evaluate that,
+it outputs D
+
+136
+00:08:20,700 --> 00:08:24,900
+and it concludes that there's
+a disagreement with his submitted answer.
+
+137
+00:08:25,566 --> 00:08:28,166
+Life is like a box of chocolate
+and the expert answer.
+
+138
+00:08:28,166 --> 00:08:31,100
+So the correctly assesses
+this to be a pretty terrible answer.
+
+139
+00:08:31,933 --> 00:08:33,266
+And so that's it.
+
+140
+00:08:33,266 --> 00:08:37,200
+I hope you take away from this video
+to design patterns
+
+141
+00:08:37,733 --> 00:08:42,000
+versus even without an expert
+provided ideal answer.
+
+142
+00:08:42,466 --> 00:08:45,866
+If you can write a rubric,
+you can use one element
+
+143
+00:08:45,900 --> 00:08:49,300
+to evaluate
+another of outputs and seconds.
+
+144
+00:08:49,300 --> 00:08:53,000
+If you can provide an expert provided,
+if you answer,
+
+145
+00:08:53,000 --> 00:08:56,700
+then that can help you better compare.
+
+146
+00:08:56,700 --> 00:09:02,866
+If and if a specific assistant output
+is similar to the expert provided idea
+
+147
+00:09:02,866 --> 00:09:05,966
+answer I hope that helps you to evaluate
+
+148
+00:09:06,366 --> 00:09:09,233
+your own system's outputs.
+
+149
+00:09:09,900 --> 00:09:12,300
+So that's both during development
+
+150
+00:09:12,333 --> 00:09:16,433
+as well as when the system is running
+and you're getting responses.
+
+151
+00:09:16,433 --> 00:09:19,266
+You can continue to monitor
+
+152
+00:09:19,600 --> 00:09:22,300
+this performance and also have these tools
+
+153
+00:09:22,300 --> 00:09:26,666
+to continuously evaluate and keep on
+improving the performance of your system.

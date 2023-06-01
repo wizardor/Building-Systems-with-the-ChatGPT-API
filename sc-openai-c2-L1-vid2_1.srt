@@ -1,0 +1,1527 @@
+﻿1
+00:00:05,133 --> 00:00:07,200
+In this first video, I'd like to share
+with you
+
+2
+00:00:07,200 --> 00:00:10,833
+an overview
+of how our launch language models work.
+
+3
+00:00:11,233 --> 00:00:15,800
+We'll go into how they are trained
+as well as details like The Tokenize
+
+4
+00:00:15,900 --> 00:00:19,400
+and how that can affect the outputs
+of when you prompt and them.
+
+5
+00:00:19,766 --> 00:00:23,366
+And we'll also take a look
+at the chat format for our EVs,
+
+6
+00:00:23,366 --> 00:00:27,233
+which is a way of specifying both system
+as well as user
+
+7
+00:00:27,233 --> 00:00:30,833
+messages and understand
+what you can do with that capability.
+
+8
+00:00:31,166 --> 00:00:32,533
+Let's take a look
+
+9
+00:00:32,933 --> 00:00:35,400
+first,
+How does a large language model work?
+
+10
+00:00:36,066 --> 00:00:39,200
+You're probably familiar
+with the text generation process
+
+11
+00:00:39,200 --> 00:00:43,166
+where you can give a prompt by voting
+and also to fill in
+
+12
+00:00:43,600 --> 00:00:46,233
+what the things are likely completions.
+
+13
+00:00:46,266 --> 00:00:48,866
+Given this problem
+and they may say because of cream cheese
+
+14
+00:00:48,866 --> 00:00:51,700
+or my mother's milk or also a friend's,
+
+15
+00:00:52,300 --> 00:00:55,533
+but how did the model learn to do this
+to me,
+
+16
+00:00:55,533 --> 00:00:59,600
+to use to train and evolve
+them is actually supervised learning
+
+17
+00:01:00,600 --> 00:01:01,866
+in supervised learning.
+
+18
+00:01:01,866 --> 00:01:07,233
+A computer learns inputs, outputs, or x,
+the Y mapping using label training data.
+
+19
+00:01:07,233 --> 00:01:10,666
+So for example, if you're using supervised
+learning to learn
+
+20
+00:01:10,666 --> 00:01:13,500
+to classify
+the sentiment of restaurant reviews,
+
+21
+00:01:14,000 --> 00:01:16,966
+you might collect a trading set like this
+where a review like
+
+22
+00:01:16,966 --> 00:01:22,400
+the pastrami sandwich is great is labeled
+as a positive sentiment review and so on.
+
+23
+00:01:22,966 --> 00:01:26,266
+And so as though
+the food was also negative
+
+24
+00:01:26,266 --> 00:01:28,166
+and the are great, he was fantastic.
+
+25
+00:01:28,166 --> 00:01:30,300
+As a positive label.
+
+26
+00:01:30,300 --> 00:01:30,666
+By the way,
+
+27
+00:01:30,666 --> 00:01:35,200
+both Eser and I were born in the UK
+and so both of us like our gray tea.
+
+28
+00:01:35,700 --> 00:01:40,200
+And so the process for supervised
+learning is typically to get label data
+
+29
+00:01:40,533 --> 00:01:43,066
+and then train them all to own data.
+
+30
+00:01:43,400 --> 00:01:46,733
+And after training you can
+then deploy and called the model
+
+31
+00:01:46,800 --> 00:01:50,300
+and give it a new restaurant
+review like this piece of have had
+
+32
+00:01:50,700 --> 00:01:53,366
+you hopefully I'll put it
+that has a positive sentiment.
+
+33
+00:01:54,133 --> 00:01:58,533
+It turns out that supervised learning
+is a code building block for training.
+
+34
+00:01:58,533 --> 00:02:00,533
+Large language models.
+
+35
+00:02:00,533 --> 00:02:04,666
+Specifically a large language
+model can be built by using supervised
+
+36
+00:02:04,666 --> 00:02:07,166
+learning to repeatedly predict
+the next word.
+
+37
+00:02:07,866 --> 00:02:10,700
+Let's say that in your training
+
+38
+00:02:10,700 --> 00:02:14,300
+sets of a lot of text data,
+you have two centers.
+
+39
+00:02:14,300 --> 00:02:16,066
+My favorite food is a
+bagel with cream cheese. And
+
+40
+00:02:17,166 --> 00:02:18,200
+then this
+
+41
+00:02:18,200 --> 00:02:22,033
+sentence is turned into a sequence
+of training examples
+
+42
+00:02:22,200 --> 00:02:26,100
+where, given the sentence fragments,
+my favorite fruit is a
+
+43
+00:02:26,866 --> 00:02:29,600
+If you want to predict the next one in
+this case was bagel
+
+44
+00:02:30,166 --> 00:02:34,266
+or given the sentence fragment
+or sentence prefix.
+
+45
+00:02:34,266 --> 00:02:36,366
+My favorite food is a bagel.
+
+46
+00:02:36,366 --> 00:02:40,233
+The next word in this case would be with
+and so on.
+
+47
+00:02:40,833 --> 00:02:44,133
+And given a large training
+set of hundreds of billions or sometimes
+
+48
+00:02:44,133 --> 00:02:48,000
+even more, whereas you can
+then create a massive training set
+
+49
+00:02:48,466 --> 00:02:52,733
+where you can start off with part
+of a sentence or part of a piece of text,
+
+50
+00:02:53,066 --> 00:02:57,766
+and repeatedly asked the language model to
+learn to predict what is the next words.
+
+51
+00:02:58,233 --> 00:03:00,833
+So today there are broadly two
+
+52
+00:03:01,600 --> 00:03:04,000
+major types of large language models.
+
+53
+00:03:04,666 --> 00:03:05,700
+The first is a base
+
+54
+00:03:06,766 --> 00:03:07,766
+and the second,
+
+55
+00:03:07,766 --> 00:03:11,200
+which is what is increasingly
+used, is the instruction to know.
+
+56
+00:03:12,300 --> 00:03:15,366
+So the base all repeatedly predicts
+the next word based on
+
+57
+00:03:15,566 --> 00:03:17,966
+texts, training, data.
+
+58
+00:03:17,966 --> 00:03:20,966
+And so if I give it a prompt,
+once upon a time there was a unicorn,
+
+59
+00:03:21,000 --> 00:03:25,266
+then it me by repeatedly predicting
+one word at a time, come up with a feature
+
+60
+00:03:25,266 --> 00:03:27,166
+and it tells a story about the unicorn
+
+61
+00:03:27,166 --> 00:03:29,233
+living in a magical forest
+with all unicorn friends.
+
+62
+00:03:30,300 --> 00:03:34,233
+Now the downside of this
+is that if you were to prompt it with
+
+63
+00:03:34,233 --> 00:03:37,866
+what is a couple of friends,
+quite plausible that on the internet
+
+64
+00:03:37,866 --> 00:03:40,466
+there might be a list of quiz questions
+about friends.
+
+65
+00:03:40,466 --> 00:03:42,800
+So me complete this
+with what this friends is like to say
+
+66
+00:03:42,800 --> 00:03:44,666
+that you want this
+friends, population and so on.
+
+67
+00:03:46,200 --> 00:03:48,933
+But what
+you really want is you want it to tell you
+
+68
+00:03:48,933 --> 00:03:53,233
+what is the couple of friends probably,
+rather than list all these questions.
+
+69
+00:03:54,166 --> 00:03:58,100
+So the instructions you learn
+instead tries to follow instructions
+
+70
+00:03:58,100 --> 00:04:01,000
+and will hopefully say
+the couple of friends is Paris.
+
+71
+00:04:02,000 --> 00:04:04,800
+How do you go from a base
+to an instruction tuned? Oh,
+
+72
+00:04:05,900 --> 00:04:10,133
+this is what the process of training
+and instruction to like chatting busy.
+
+73
+00:04:10,500 --> 00:04:14,133
+Looks like your first trailer
+based on the lot of data.
+
+74
+00:04:14,166 --> 00:04:16,366
+So hundreds of billions of words.
+Maybe even more.
+
+75
+00:04:16,633 --> 00:04:19,633
+And this is a process
+that can take months on
+
+76
+00:04:19,633 --> 00:04:21,933
+a large supercomputing system.
+
+77
+00:04:22,800 --> 00:04:27,366
+After you've trained the base alone,
+you would then further train the model
+
+78
+00:04:27,600 --> 00:04:31,533
+by fine
+tuning it on a smaller set of examples
+
+79
+00:04:31,933 --> 00:04:35,566
+where the output follows
+an input instruction.
+
+80
+00:04:35,566 --> 00:04:40,233
+And so, for example,
+you may have contractors help.
+
+81
+00:04:40,233 --> 00:04:43,866
+You write a lot of examples
+of an instruction and then a good response
+
+82
+00:04:44,166 --> 00:04:45,433
+to an instruction,
+
+83
+00:04:45,433 --> 00:04:49,433
+and that creates a training set
+to carry out this additional fine tuning.
+
+84
+00:04:49,433 --> 00:04:52,200
+So the lesson for the well, this the next
+what if is trying to
+
+85
+00:04:52,366 --> 00:04:53,666
+follow an instruction
+
+86
+00:04:54,700 --> 00:04:55,533
+after that
+
+87
+00:04:55,533 --> 00:04:58,333
+to improve the quality of the output.
+
+88
+00:04:58,800 --> 00:05:02,933
+A common process now is to obtain human
+ratings of the quality
+
+89
+00:05:03,200 --> 00:05:06,366
+of many different outputs on criteria,
+
+90
+00:05:06,366 --> 00:05:09,633
+such as whether the output is helpful,
+honest and harmless,
+
+91
+00:05:10,233 --> 00:05:13,100
+and you can then further tune the element
+
+92
+00:05:13,400 --> 00:05:17,833
+to increase the probability of a
+generating the more highly rated upwards.
+
+93
+00:05:17,833 --> 00:05:21,100
+And the most common technique to do
+this is RH, which stands
+
+94
+00:05:21,100 --> 00:05:24,366
+for reinforcement
+Learning from Human feedback.
+
+95
+00:05:24,366 --> 00:05:26,233
+And. WHEREAS, training the base hour
+
+96
+00:05:26,233 --> 00:05:29,733
+can take months, the process
+of going from the base
+
+97
+00:05:30,200 --> 00:05:34,400
+to the instruction to, you know,
+can be done in maybe days on much more
+
+98
+00:05:34,933 --> 00:05:38,333
+on a much more modest sized dataset,
+a much more modest sized
+
+99
+00:05:38,333 --> 00:05:40,133
+computational resources.
+
+100
+00:05:40,133 --> 00:05:44,666
+So this is how you would use
+an 11 on content for the few libraries.
+
+101
+00:05:44,666 --> 00:05:48,700
+So I'm going to load my open a key here.
+
+102
+00:05:48,766 --> 00:05:51,833
+I'll say a little bit more
+about this later in this video.
+
+103
+00:05:52,333 --> 00:05:56,700
+And here's a helper function
+to get a completion given a prompt
+
+104
+00:05:57,333 --> 00:06:02,233
+if you have not yet installed the open
+the AI package on your computer,
+
+105
+00:06:02,600 --> 00:06:06,366
+you might have to run PIP, install
+open the I,
+
+106
+00:06:06,633 --> 00:06:09,233
+but I already have an install here
+so I we'll run that
+
+107
+00:06:09,600 --> 00:06:12,700
+and then shift into to run this.
+
+108
+00:06:12,700 --> 00:06:15,333
+And now I can set response equals
+
+109
+00:06:17,533 --> 00:06:19,466
+get completion.
+
+110
+00:06:20,033 --> 00:06:22,966
+What is the capital of France
+
+111
+00:06:27,433 --> 00:06:29,566
+and hopefully
+
+112
+00:06:29,566 --> 00:06:30,533
+it will
+
+113
+00:06:31,300 --> 00:06:34,600
+give me a good result.
+
+114
+00:06:34,600 --> 00:06:40,200
+Now about now in the description
+that the launch language model so far
+
+115
+00:06:40,500 --> 00:06:44,533
+I talked about it
+as predicting one at a time.
+
+116
+00:06:44,533 --> 00:06:47,100
+But there's actually one more important
+technical detail.
+
+117
+00:06:47,666 --> 00:06:52,200
+If you were to tell it,
+take the letters into work where lollipop
+
+118
+00:06:53,633 --> 00:06:55,633
+and reverse them.
+
+119
+00:06:55,633 --> 00:06:56,866
+This seems like an easy task.
+
+120
+00:06:56,866 --> 00:06:59,033
+Maybe like a four year
+euro could do this task.
+
+121
+00:06:59,700 --> 00:07:03,033
+But if you were to ask Chiquita
+to do this,
+
+122
+00:07:04,000 --> 00:07:07,300
+it actually outputs a somewhat garbled
+
+123
+00:07:07,766 --> 00:07:10,900
+whatever this is, this is not lollipop.
+
+124
+00:07:10,900 --> 00:07:13,833
+This is not lollipop us reverse.
+
+125
+00:07:13,866 --> 00:07:19,200
+So why is Gypsy unable to do what
+seems like a relatively simple task?
+
+126
+00:07:19,466 --> 00:07:23,400
+It turns out that this one more
+important detail for how large language
+
+127
+00:07:23,400 --> 00:07:27,733
+model works, which is it doesn't actually
+repeatedly predict the next words.
+
+128
+00:07:27,733 --> 00:07:31,500
+It is that it repeatedly predicts
+the next token.
+
+129
+00:07:31,933 --> 00:07:36,300
+And what that actually does is
+it would take a sequence of characters
+
+130
+00:07:36,300 --> 00:07:41,400
+like learning new things is fun and group
+the characters together to form tokens
+
+131
+00:07:41,766 --> 00:07:45,833
+that comprise comedy
+occurring sequences of characters.
+
+132
+00:07:46,366 --> 00:07:48,866
+So here learning new things is fun.
+
+133
+00:07:48,866 --> 00:07:53,366
+Each of them is a fairly common word,
+and so each token corresponds
+
+134
+00:07:53,366 --> 00:07:56,933
+to one word or one word in a space
+or an exclamation mark.
+
+135
+00:07:57,766 --> 00:07:59,966
+But if you were to give it input
+
+136
+00:08:00,000 --> 00:08:04,000
+with some somewhat less frequently used
+words like prompting as powerful
+
+137
+00:08:04,000 --> 00:08:08,700
+developer to the word
+prompting is still not that common
+
+138
+00:08:08,866 --> 00:08:12,600
+in the English language,
+but certainly gaining in popularity.
+
+139
+00:08:12,600 --> 00:08:16,100
+And so prompting is actually broken down
+to three tokens with prompt
+
+140
+00:08:16,533 --> 00:08:19,100
+and in because there's three a commonly
+
+141
+00:08:19,100 --> 00:08:22,500
+occurring sequences of letters.
+
+142
+00:08:22,500 --> 00:08:26,166
+And if you were to give it the word
+lollipop, the token
+
+143
+00:08:26,166 --> 00:08:30,666
+those are actually breaks down into three
+tokens L and all and E pop.
+
+144
+00:08:31,200 --> 00:08:33,666
+And because it isn't seeing
+
+145
+00:08:33,666 --> 00:08:38,766
+the individual letters is instead
+CVC tokens is more difficult for it
+
+146
+00:08:38,766 --> 00:08:42,800
+to correctly
+print out these letters in reverse order.
+
+147
+00:08:43,166 --> 00:08:47,100
+So here's a trick you can use to fix this.
+
+148
+00:08:47,800 --> 00:08:49,566
+If I were to add dashes
+
+149
+00:08:51,166 --> 00:08:52,500
+between these letters
+
+150
+00:08:52,500 --> 00:08:55,033
+and spaces would work
+to other things would were too.
+
+151
+00:08:55,333 --> 00:08:57,566
+And tell it to put those in lollipop
+and reverse them.
+
+152
+00:08:58,100 --> 00:09:00,266
+Then it actually does a much better
+job. This.
+
+153
+00:09:00,333 --> 00:09:02,333
+Oh, I pop out.
+
+154
+00:09:02,333 --> 00:09:05,400
+And the reason for that is
+if you pass a lollipop
+
+155
+00:09:05,400 --> 00:09:08,400
+with dashes in between the letters,
+it tokenize
+
+156
+00:09:08,433 --> 00:09:12,866
+each of these characters into individual
+token, making it easier for it
+
+157
+00:09:13,166 --> 00:09:16,100
+to see the individual letters
+and print them out in reverse order.
+
+158
+00:09:16,933 --> 00:09:21,000
+So if you ever wants to use GBC
+to play a word game,
+
+159
+00:09:21,000 --> 00:09:24,866
+like where they'll scrabble something,
+this nifty trick hopes
+
+160
+00:09:24,866 --> 00:09:27,800
+it better see
+the individual letters of the words
+
+161
+00:09:29,333 --> 00:09:30,633
+for the English language.
+
+162
+00:09:30,633 --> 00:09:33,366
+One token, roughly on average corresponds
+
+163
+00:09:33,366 --> 00:09:36,333
+to about four characters
+or about three quarters of a words.
+
+164
+00:09:37,200 --> 00:09:41,400
+And so different large language
+models will often have different limits
+
+165
+00:09:41,400 --> 00:09:45,533
+on the number of input plus output tokens
+it can accept.
+
+166
+00:09:45,600 --> 00:09:49,100
+The input is often called the contacts
+and the output is often
+
+167
+00:09:49,100 --> 00:09:53,200
+called the completion
+and the model Gypsy 3.5 Terrible.
+
+168
+00:09:53,200 --> 00:09:55,366
+For example, the most commonly used H.A.
+
+169
+00:09:55,400 --> 00:09:58,400
+model has a limit of roughly 4000 tokens
+
+170
+00:09:58,666 --> 00:10:01,500
+and the inputs plus output.
+
+171
+00:10:01,500 --> 00:10:04,633
+So if you try to feed in an input context
+as much longer than did,
+
+172
+00:10:04,633 --> 00:10:07,100
+so actually throw
+in the exception on generated error.
+
+173
+00:10:08,133 --> 00:10:10,266
+Next, I want to share with you
+
+174
+00:10:10,266 --> 00:10:15,000
+another powerful way to use an API
+
+175
+00:10:15,733 --> 00:10:18,566
+which involves specifying separate system
+
+176
+00:10:18,566 --> 00:10:22,366
+user and assistance messages.
+
+177
+00:10:22,366 --> 00:10:26,766
+Let me show you an example
+then we can explain in more detail
+
+178
+00:10:27,033 --> 00:10:29,333
+what is actually doing.
+
+179
+00:10:29,633 --> 00:10:33,133
+Here's a new helper function
+called Get completion from Messages.
+
+180
+00:10:33,600 --> 00:10:38,733
+And when we prompt as our end,
+we are going to give it multiple messages.
+
+181
+00:10:39,200 --> 00:10:41,300
+Just an example of what you can do.
+
+182
+00:10:42,433 --> 00:10:46,500
+I'm going to specify
+first a message and the row of a system.
+
+183
+00:10:46,500 --> 00:10:49,500
+So there's a system message
+
+184
+00:10:49,500 --> 00:10:51,933
+and the contents of the system messages
+
+185
+00:10:52,433 --> 00:10:54,966
+you're in,
+the system responds to the sound of Dr.
+
+186
+00:10:54,966 --> 00:10:55,866
+Seuss.
+
+187
+00:10:56,400 --> 00:10:58,766
+Then I'm going to specify a user message.
+
+188
+00:10:58,766 --> 00:11:01,333
+So the role of the second message is road
+user.
+
+189
+00:11:01,600 --> 00:11:06,266
+And the content of this is write me
+a very short poem about a happy carrot.
+
+190
+00:11:07,000 --> 00:11:09,166
+And so let's run that.
+
+191
+00:11:09,166 --> 00:11:12,033
+And with temperature equals one,
+I actually never know
+
+192
+00:11:12,033 --> 00:11:14,733
+what's going to come out,
+but okay, that's a cool poem.
+
+193
+00:11:14,733 --> 00:11:19,433
+Oh, how much of this carrot that I see
+and it actually runs pretty well.
+
+194
+00:11:19,433 --> 00:11:20,333
+All right, well done.
+
+195
+00:11:22,066 --> 00:11:23,100
+And so in this
+
+196
+00:11:23,100 --> 00:11:27,966
+example, the system message specifies
+the overall tone
+
+197
+00:11:28,500 --> 00:11:31,833
+of what you want
+the large language model to do.
+
+198
+00:11:32,366 --> 00:11:36,733
+And the user message is a specific
+instruction that you wanted to carry out.
+
+199
+00:11:37,233 --> 00:11:39,333
+Given this higher level behavior.
+
+200
+00:11:39,333 --> 00:11:41,400
+There was specified in the system message.
+
+201
+00:11:42,433 --> 00:11:45,000
+Here's
+an illustration of how it all works.
+
+202
+00:11:45,933 --> 00:11:50,266
+So this is how the chat format works.
+
+203
+00:11:51,600 --> 00:11:54,166
+The system message sets the overall tone,
+
+204
+00:11:54,166 --> 00:11:57,633
+the behavior of the launch language model
+or the assistant.
+
+205
+00:11:58,133 --> 00:12:02,733
+And then when you give their user message,
+such as maybe such as a
+
+206
+00:12:02,733 --> 00:12:06,733
+tell me a joke or write me a poem,
+it will then output
+
+207
+00:12:07,766 --> 00:12:12,300
+an appropriate response following
+what you asked for and did use the message
+
+208
+00:12:12,500 --> 00:12:15,266
+and consistent with the overall behavior
+
+209
+00:12:15,300 --> 00:12:18,966
+set in the system message.
+
+210
+00:12:18,966 --> 00:12:21,366
+And by the way,
+although I'm not illustrating it here,
+
+211
+00:12:21,733 --> 00:12:25,400
+if you want to use this
+in a multi tone conversation,
+
+212
+00:12:25,800 --> 00:12:29,266
+you can also input assistant messages
+
+213
+00:12:30,500 --> 00:12:32,100
+in this messages format
+
+214
+00:12:32,100 --> 00:12:35,400
+to let Chickpea know what it had
+previously said.
+
+215
+00:12:36,333 --> 00:12:38,266
+If you wanted to continue the conversation
+
+216
+00:12:38,266 --> 00:12:40,566
+based on things
+that have previously said as well.
+
+217
+00:12:41,600 --> 00:12:44,933
+But here are a few more examples
+
+218
+00:12:44,933 --> 00:12:47,033
+if you want to set the tone
+
+219
+00:12:47,766 --> 00:12:50,233
+to tell it to have a one sentence
+
+220
+00:12:50,233 --> 00:12:53,233
+long output, then in the system message,
+
+221
+00:12:53,233 --> 00:12:56,000
+I can say all your responses
+must be one sentence long.
+
+222
+00:12:56,833 --> 00:12:59,733
+And when I execute this it outputs.
+
+223
+00:12:59,733 --> 00:13:01,866
+A single sentence is no longer a plea.
+
+224
+00:13:01,866 --> 00:13:05,466
+Another the solved
+after this is a single sentence.
+
+225
+00:13:05,466 --> 00:13:08,400
+There's a story about the happy carrots.
+
+226
+00:13:09,700 --> 00:13:12,333
+And if we want to combine
+
+227
+00:13:12,333 --> 00:13:15,000
+both specifying the style and the length,
+
+228
+00:13:15,433 --> 00:13:18,966
+then I can use the system message to say
+you're an assistant.
+
+229
+00:13:18,966 --> 00:13:20,400
+In response to start of the series,
+
+230
+00:13:20,400 --> 00:13:23,633
+all your sentences must
+be one sentence long, and now
+
+231
+00:13:26,000 --> 00:13:30,300
+this generates a nice one sentence point.
+
+232
+00:13:30,933 --> 00:13:32,966
+It was always smiling and never scary.
+
+233
+00:13:32,966 --> 00:13:35,566
+I like that. This a very happy point in.
+
+234
+00:13:35,566 --> 00:13:40,200
+And then lastly, just for fun,
+if you are using an L
+
+235
+00:13:40,500 --> 00:13:44,933
+and you want to know how many tokens are
+you using, here's a hope.
+
+236
+00:13:44,933 --> 00:13:48,033
+The function
+that is a little bit more sophisticated
+
+237
+00:13:48,466 --> 00:13:52,600
+in that it gets a response from the open
+AI API endpoint
+
+238
+00:13:53,033 --> 00:13:58,500
+and then it uses other values
+in the response to tell you how many
+
+239
+00:13:58,500 --> 00:14:01,666
+prompt tokens, completion tokens and total
+
+240
+00:14:01,666 --> 00:14:04,833
+tokens were used in your API call.
+
+241
+00:14:04,833 --> 00:14:07,100
+Let me define that.
+
+242
+00:14:07,100 --> 00:14:12,766
+And if I run this now, here's
+the response.
+
+243
+00:14:13,200 --> 00:14:16,500
+And here is
+
+244
+00:14:18,066 --> 00:14:20,266
+a count of how many tokens we use.
+
+245
+00:14:20,366 --> 00:14:24,300
+So this output, which had 55 tokens,
+
+246
+00:14:24,300 --> 00:14:27,300
+whereas the prompt inputs had 37 tokens,
+
+247
+00:14:27,300 --> 00:14:29,933
+So this used up 92 tokens
+
+248
+00:14:30,300 --> 00:14:33,533
+altogether
+without using our models in practice.
+
+249
+00:14:33,533 --> 00:14:37,966
+I don't worry that much frankly,
+about the number of tokens I'm using.
+
+250
+00:14:38,433 --> 00:14:41,666
+Maybe one case where it might be worth
+checking the number of tokens is
+
+251
+00:14:41,700 --> 00:14:44,900
+if you're worried
+that the user may giving you too long
+
+252
+00:14:44,900 --> 00:14:49,333
+and inputs that exceeds the 4000 or so
+token limits of empathy,
+
+253
+00:14:49,800 --> 00:14:52,400
+in which case you could double check
+how many tokens it was
+
+254
+00:14:52,400 --> 00:14:54,600
+and truncated to make sure you stay within
+
+255
+00:14:54,600 --> 00:14:57,333
+the input token
+limit of the launch language model.
+
+256
+00:14:58,200 --> 00:15:00,966
+Now I want to share with you one more tip
+
+257
+00:15:00,966 --> 00:15:03,700
+for how to use a large language model
+
+258
+00:15:04,433 --> 00:15:06,866
+called the Open API requires
+
+259
+00:15:07,066 --> 00:15:11,800
+using an API key this tied to either
+a free or a paid account.
+
+260
+00:15:12,200 --> 00:15:15,600
+And so many developers will write the API
+
+261
+00:15:15,600 --> 00:15:18,900
+key in plaintext
+like this into their Jupyter notebook.
+
+262
+00:15:19,433 --> 00:15:24,366
+And this is a less secure way
+of using API keys
+
+263
+00:15:24,366 --> 00:15:29,600
+that I would not recommend
+you use because it's just too easy
+
+264
+00:15:29,600 --> 00:15:34,066
+to share this notebook with someone else
+or check this into a GitHub or something
+
+265
+00:15:34,366 --> 00:15:37,600
+and does end up leaking your API key
+to someone else.
+
+266
+00:15:38,466 --> 00:15:39,533
+In contrast,
+
+267
+00:15:40,566 --> 00:15:43,633
+what you saw me do and the Jupyter
+notebook
+
+268
+00:15:44,000 --> 00:15:48,900
+was this piece of code where I use
+a library dot env and then run.
+
+269
+00:15:48,900 --> 00:15:53,533
+This commands a little to find out
+is to read a local file
+
+270
+00:15:53,800 --> 00:15:57,500
+which is called end
+that contains my secret key.
+
+271
+00:15:58,433 --> 00:16:00,933
+And so with this code snippet
+
+272
+00:16:00,933 --> 00:16:03,733
+I have locally stored a file contents
+
+273
+00:16:03,733 --> 00:16:07,200
+that contains my API key and this loads it
+
+274
+00:16:07,200 --> 00:16:10,266
+into the operating systems
+environmental variable.
+
+275
+00:16:11,533 --> 00:16:13,766
+And then our start get ends
+
+276
+00:16:14,400 --> 00:16:17,400
+open the API key stores
+into this variable.
+
+277
+00:16:17,800 --> 00:16:22,800
+And in this whole process,
+I don't ever have to enter the API
+
+278
+00:16:22,800 --> 00:16:26,333
+key in plaintext in unencrypted plaintext
+into my true for the notebook.
+
+279
+00:16:26,800 --> 00:16:29,400
+So this is a relatively more secure
+
+280
+00:16:29,533 --> 00:16:32,033
+and a better way to access the API.
+
+281
+00:16:32,600 --> 00:16:36,800
+And in fact this is a general method
+for storing different API keys
+
+282
+00:16:36,900 --> 00:16:40,666
+from lots of different online services
+that you might want to use.
+
+283
+00:16:40,666 --> 00:16:42,233
+They call for every Jupyter notebook.
+
+284
+00:16:43,666 --> 00:16:46,033
+Lastly, I think
+
+285
+00:16:46,433 --> 00:16:49,766
+the degree to which
+prompting this revolutionizing
+
+286
+00:16:50,100 --> 00:16:53,233
+application
+development is still underappreciated
+
+287
+00:16:53,966 --> 00:16:58,166
+in the traditional supervised machine
+learning workflow like the restaurant
+
+288
+00:16:58,166 --> 00:17:00,966
+Review central classification example
+that I touched on just now.
+
+289
+00:17:01,500 --> 00:17:04,766
+If you want to build a classifier
+to classify restaurant review
+
+290
+00:17:04,766 --> 00:17:08,966
+positive or negative sentiments, you
+at first get a bunch of label data, maybe
+
+291
+00:17:08,966 --> 00:17:12,100
+hundreds of examples this might take,
+I don't know, weeks, maybe a month.
+
+292
+00:17:12,900 --> 00:17:16,933
+Then you would train a model on data
+and getting an appropriate
+
+293
+00:17:16,933 --> 00:17:20,266
+open source model,
+tuning on the model, evaluating it.
+
+294
+00:17:20,600 --> 00:17:24,766
+That might take days, weeks,
+maybe even a few months.
+
+295
+00:17:24,766 --> 00:17:29,133
+And then you might have
+to find a call service to deploy it
+
+296
+00:17:29,233 --> 00:17:32,500
+and then a model upload to the cloud
+and then run the model
+
+297
+00:17:32,500 --> 00:17:34,266
+and finally be able to call your model.
+
+298
+00:17:34,266 --> 00:17:35,900
+And that's, again, not uncommon
+
+299
+00:17:35,900 --> 00:17:38,800
+for this to take a team
+a few months to get working.
+
+300
+00:17:39,600 --> 00:17:43,800
+In contrast
+with prompting base machine learning,
+
+301
+00:17:43,800 --> 00:17:47,333
+When you have a text application,
+you can specify a problem.
+
+302
+00:17:47,800 --> 00:17:51,300
+This can take minutes, maybe hours,
+if you need to iterate a few times
+
+303
+00:17:51,300 --> 00:17:55,633
+to get an effective prompt
+and then in hours,
+
+304
+00:17:56,100 --> 00:17:59,400
+maybe at most days,
+but frankly more often hours
+
+305
+00:17:59,833 --> 00:18:05,400
+you can have this running using API calls
+and start making calls to the model.
+
+306
+00:18:05,400 --> 00:18:09,733
+And once you've done that in
+just maybe minutes or hours, you can start
+
+307
+00:18:10,066 --> 00:18:13,533
+calling the model
+and start making inferences.
+
+308
+00:18:13,533 --> 00:18:16,666
+And so there are applications
+that used to take me maybe
+
+309
+00:18:16,666 --> 00:18:19,933
+six months or a year to build
+that you can now build in minutes
+
+310
+00:18:19,933 --> 00:18:23,733
+or hours, maybe very small numbers of days
+using prompting,
+
+311
+00:18:23,733 --> 00:18:28,166
+and this is revolutionizing
+what applications can be built quickly.
+
+312
+00:18:28,800 --> 00:18:33,800
+One important caveat this applies
+to many unstructured data applications,
+
+313
+00:18:33,800 --> 00:18:36,566
+including specifically text applications
+and maybe
+
+314
+00:18:37,066 --> 00:18:39,233
+increasingly vision applications.
+
+315
+00:18:39,266 --> 00:18:42,333
+Although the vision technology
+is much less mature
+
+316
+00:18:42,600 --> 00:18:45,900
+now, this kind of getting there,
+this recipe doesn't really work
+
+317
+00:18:46,333 --> 00:18:50,533
+for structured either applications,
+meaning machine learning applications on
+
+318
+00:18:51,433 --> 00:18:54,866
+days with lots of numerical values
+in Excel spreadsheet,
+
+319
+00:18:54,866 --> 00:18:58,133
+say the for applications
+to which this does apply.
+
+320
+00:18:58,533 --> 00:19:01,866
+The fact that a component can be built
+so quickly
+
+321
+00:19:02,200 --> 00:19:07,066
+is changing the workflow
+of how the entire system might be built.
+
+322
+00:19:07,200 --> 00:19:10,200
+Though the entire system
+may still take days or weeks or something,
+
+323
+00:19:10,200 --> 00:19:13,000
+but at least this piece of
+it can be done much faster.
+
+324
+00:19:13,800 --> 00:19:17,400
+And so with that, let's go on
+to the next video where user will show
+
+325
+00:19:17,700 --> 00:19:20,633
+how to use these components to evaluate
+
+326
+00:19:20,766 --> 00:19:24,066
+input to a customer service assistant.
+
+327
+00:19:24,433 --> 00:19:27,600
+And this will be part of a bigger example
+that you see developed
+
+328
+00:19:27,766 --> 00:19:29,033
+through this course
+
+329
+00:19:29,033 --> 00:19:33,800
+for building a customer service
+assistant for an online retailer.
